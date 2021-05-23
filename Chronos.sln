@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chronos", "Chronos\Chronos.csproj", "{5E757B8A-919C-4C97-90CD-AA20BA804A41}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chronos.AtlassianApi", "Chronos.AtlassianApi\Chronos.AtlassianApi.csproj", "{05A0CA82-042A-4C1A-9E11-A7FA19BD1F38}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chronos.WorkLogs", "Chronos.WorkLogs\Chronos.WorkLogs.csproj", "{05D13F80-05EC-47E7-85AF-D4DB0FE7A744}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E757B8A-919C-4C97-90CD-AA20BA804A41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E757B8A-919C-4C97-90CD-AA20BA804A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E757B8A-919C-4C97-90CD-AA20BA804A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E757B8A-919C-4C97-90CD-AA20BA804A41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05A0CA82-042A-4C1A-9E11-A7FA19BD1F38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05A0CA82-042A-4C1A-9E11-A7FA19BD1F38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05A0CA82-042A-4C1A-9E11-A7FA19BD1F38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05A0CA82-042A-4C1A-9E11-A7FA19BD1F38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05D13F80-05EC-47E7-85AF-D4DB0FE7A744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05D13F80-05EC-47E7-85AF-D4DB0FE7A744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05D13F80-05EC-47E7-85AF-D4DB0FE7A744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05D13F80-05EC-47E7-85AF-D4DB0FE7A744}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E5EFE93B-5B68-44B8-BA4A-0C69EDA59F3E}
+	EndGlobalSection
+EndGlobal

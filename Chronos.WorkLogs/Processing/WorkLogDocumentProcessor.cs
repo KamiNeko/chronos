@@ -14,20 +14,39 @@ namespace Chronos.WorkLogs.Processing
             this.workLogItems = workLogItems ?? throw new ArgumentNullException(nameof(workLogItems));
         }
 
-        public void UpdateDocument()
+        public void UpdateDocument(DateTime? date = null, bool removeWorkLogItems = false, bool removeBreakMarks = false)
         {
             string text = File.ReadAllText(filename);
             string[] originalLines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
+            bool dateTimeIfWorkItemsFound = false;
             List<string> newLines = new List<string>();
-
 
             foreach (var line in originalLines)
             {
+                // Search date (format: '-- 2021-05-05 --')
+                if (date.HasValue && line.StartsWith("--") && line.EndsWith("--") && !dateTimeIfWorkItemsFound)
+                {
+                    dateTimeIfWorkItemsFound = true;
+                    newLines.Add($"-- {date.Value.ToShortDateString()} --");
+                    continue;
+                }
+
+                // Remove break marks, when option is set
+                if (removeBreakMarks && line.Trim().StartsWith("-- PAUSE --"))
+                {
+                    continue;
+                }
+
                 // Search worklog item
                 if (!line.StartsWith("["))
                 {
                     newLines.Add(line);
+                    continue;
+                }
+
+                if (removeWorkLogItems)
+                {
                     continue;
                 }
 

@@ -35,6 +35,7 @@ namespace Chronos
                 rootCommand.Add(ScanFileCommand.Create());
                 rootCommand.Add(ScanDirectoryCommand.Create());
                 rootCommand.Add(ProcessFileCommand.Create(apiSettings));
+                rootCommand.Add(NewFileCommand.Create(apiSettings));
 
                 var commandLineArguments = Environment.GetCommandLineArgs()[1..];
                 await rootCommand.InvokeAsync(commandLineArguments);

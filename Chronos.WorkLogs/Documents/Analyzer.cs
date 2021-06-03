@@ -9,6 +9,21 @@ namespace Chronos.WorkLogs.Documents
 {
     public class Analyzer
     {
+        public static string GenerateYearDirectoryPath(string basePath, int year)
+        {
+            return Path.Combine(basePath, year.ToString("D4"));
+        }
+
+        public static string GenerateMonthDirectoryPath(string basePath, int year, int month)
+        {
+            return Path.Combine(basePath, year.ToString("D4"), GetMonthDirectoryName(month));
+        }
+
+        public static string GenerateDayFilePath(string basePath, int year, int month, int day)
+        {
+            return Path.Combine(basePath, year.ToString("D4"), GetMonthDirectoryName(month), $"{year:D4}-{month:D2}-{day:D2}") + ".txt";
+        }
+
         public Analyzer(string basePath)
         {
             this.basePath = basePath ?? throw new ArgumentNullException(nameof(basePath));
@@ -52,7 +67,7 @@ namespace Chronos.WorkLogs.Documents
         {
             var documents = new List<Document>();
 
-            string yearDirectory = Path.Combine(basePath, year.ToString("D4"));
+            string yearDirectory = GenerateYearDirectoryPath(basePath, year);
             var directories = Directory.EnumerateDirectories(yearDirectory);
             var validMonthDirectoryNames = GetMonthDirectoryNames();
 
@@ -89,7 +104,7 @@ namespace Chronos.WorkLogs.Documents
                 var extension = Path.GetExtension(file).ToLower();
 
                 // Parse only text files
-                if (Path.GetExtension(file).ToLower() != ".txt")
+                if (extension != ".txt")
                 {
                     continue;
                 }
@@ -179,10 +194,10 @@ namespace Chronos.WorkLogs.Documents
             return monthDirectoryNames;
         }
 
-        private string GetMonthDirectoryName(int month)
+        private static string GetMonthDirectoryName(int month)
         {
             var date = new DateTime(1000, month, 01);
-            return $"{date.ToString("MM")} - {date.ToString("MMMM")}";
+            return $"{date:MM} - {date:MMMM}";
         }
 
         private readonly string basePath;

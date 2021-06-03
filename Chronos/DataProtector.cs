@@ -17,6 +17,7 @@ namespace Chronos
             apiSettings.JiraToken = protector.Protect(apiSettings.JiraToken);
             apiSettings.JiraUserId = protector.Protect(apiSettings.JiraUserId);
             apiSettings.TempoToken = protector.Protect(apiSettings.TempoToken);
+            apiSettings.BasePath = protector.Protect(apiSettings.BasePath);
 
             string json = JsonConvert.SerializeObject(apiSettings);
 
@@ -35,7 +36,8 @@ namespace Chronos
                     JiraCloudInstanceName = protector.Unprotect(apiSettings.JiraCloudInstanceName),
                     JiraToken = protector.Unprotect(apiSettings.JiraToken),
                     JiraUserId = protector.Unprotect(apiSettings.JiraUserId),
-                    TempoToken = protector.Unprotect(apiSettings.TempoToken)
+                    TempoToken = protector.Unprotect(apiSettings.TempoToken),
+                    BasePath = protector.Unprotect(apiSettings.BasePath),
                 };
 
                 return unprotectedApiSettings;

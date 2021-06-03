@@ -7,6 +7,7 @@
         public string JiraToken { get; set; }
         public string TempoToken { get; set; }
         public string JiraUserId { get; set; }
+        public string BasePath { get; set; }
     }
 }
 

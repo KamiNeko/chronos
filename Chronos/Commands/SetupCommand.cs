@@ -3,6 +3,7 @@ using Spectre.Console;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
@@ -25,13 +26,13 @@ namespace Chronos.Commands
         internal static async Task Run()
         {
             AnsiConsole.WriteLine();
-            AnsiConsole.MarkupLine("In order to access Atlassian Jira and Tempo, we need to configure some things first. Please enter the e-mail address you use to login into your Jira account.");
+            AnsiConsole.MarkupLine("In order to access Atlassian Jira and Tempo, we need to configure some things first. Please enter the e-mail address you are using to login into your Jira account.");
             AnsiConsole.WriteLine();
 
             var apiSettings = new ApiSettings();
 
             apiSettings.Email = AnsiConsole.Prompt(
-                new TextPrompt<string>("E-Mail address: ")
+                new TextPrompt<string>("E-mail address: ")
                     .Validate(x =>
                     {
                         if (IsValidEmail(x))
@@ -126,7 +127,7 @@ namespace Chronos.Commands
             AnsiConsole.Markup("[green bold]OK[/]");
             AnsiConsole.WriteLine();
 
-            AnsiConsole.WriteLine("Last we need your account id, this can now be obtained automatically...");
+            AnsiConsole.WriteLine("Next we need your account id, this can now be obtained automatically...");
 
             apiSettings.JiraUserId = string.Empty;
 
@@ -140,6 +141,19 @@ namespace Chronos.Commands
                     });
 
             AnsiConsole.WriteLine($"Your account id is: {apiSettings.JiraUserId}");
+            AnsiConsole.WriteLine();
+            
+            AnsiConsole.WriteLine("Lastly, we need to setup the base path, where your time tracking files are stored.");
+            AnsiConsole.WriteLine();
+
+            apiSettings.BasePath = AnsiConsole.Prompt(
+                new TextPrompt<string>("Please enter the path: ")
+                .Validate(input =>
+                {
+                    return Directory.Exists(input) ? ValidationResult.Success() : ValidationResult.Error("[red]Invalid path[/]");
+                }));
+
+            AnsiConsole.WriteLine();
 
             DataProtector.ProtectApiSettings(apiSettings);
 

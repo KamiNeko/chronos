@@ -13,12 +13,12 @@ namespace Chronos.Commands
         internal static Command Create()
         {
             var scanDirectoryCommand = new Command("scan-dir")
+            {
+                new Option<string>("--input", description: "The input directory path")
                 {
-                    new Option<string>("--input", description: "The input directory path")
-                    {
-                        IsRequired = true
-                    }
-                };
+                    IsRequired = true
+                }
+            };
 
             scanDirectoryCommand.Description = "Scan a base directory for time tracking files";
             scanDirectoryCommand.Handler = CommandHandler.Create<string>((input) =>
@@ -98,7 +98,7 @@ namespace Chronos.Commands
                 AnsiConsole.Render(table);
                 AnsiConsole.WriteLine();
             }
-            catch (Exception ex)
+            catch
             {
                 AnsiConsole.Render(new Markup("[bold red]Unexpected error![/]").LeftAligned());
                 AnsiConsole.WriteLine();

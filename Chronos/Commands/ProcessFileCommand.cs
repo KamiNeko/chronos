@@ -18,12 +18,12 @@ namespace Chronos.Commands
         internal static Command Create(ApiSettings apiSettings)
         {
             var scanDirectoryCommand = new Command("process-file")
+            {
+                new Option<string>("--input", description: "The input file name")
                 {
-                    new Option<string>("--input", description: "The input file name")
-                    {
-                        IsRequired = true
-                    }
-                };
+                    IsRequired = true
+                }
+            };
 
             scanDirectoryCommand.Description = "Process a time tracking file";
             scanDirectoryCommand.Handler = CommandHandler.Create<string>(async (input) =>
@@ -176,10 +176,10 @@ namespace Chronos.Commands
                 StartTime = workLogItem.StartTime.ToString(@"hh\:mm\:ss"),
                 BillableSeconds = timeSpentInSeconds,
                 TimeSpentSeconds = timeSpentInSeconds,
-                Attributes = new System.Collections.Generic.List<Chronos.AtlassianApi.Dto.Tempo.Attribute>()
+                Attributes = new System.Collections.Generic.List<Attribute>()
             };
 
-            workLogItemCreateEntry.Attributes.Add(new Chronos.AtlassianApi.Dto.Tempo.Attribute
+            workLogItemCreateEntry.Attributes.Add(new Attribute
             {
                 Key = "_Kostenstelle_",
                 Value = accountKey
@@ -187,7 +187,7 @@ namespace Chronos.Commands
 
             if (setActivityType)
             {
-                workLogItemCreateEntry.Attributes.Add(new Chronos.AtlassianApi.Dto.Tempo.Attribute
+                workLogItemCreateEntry.Attributes.Add(new Attribute
                 {
                     Key = "_Tätigkeitstyp_",
                     Value = activityTypeText

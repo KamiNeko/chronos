@@ -2,11 +2,8 @@
 using Chronos.WorkLogs.Analysis;
 using Chronos.WorkLogs.Parsing;
 using Spectre.Console;
-using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
-using System.IO;
-using System.Linq;
 
 namespace Chronos.Commands
 {
@@ -15,12 +12,12 @@ namespace Chronos.Commands
         internal static Command Create()
         {
             var scanFileCommand = new Command("scan-file")
+            {
+                new Option<string>("--input", description: "The input file name")
                 {
-                    new Option<string>("--input", description: "The input file name")
-                    {
-                        IsRequired = true
-                    }
-                };
+                    IsRequired = true
+                }
+            };
 
             scanFileCommand.Description = "Scan a time tracking *.txt file";
             scanFileCommand.Handler = CommandHandler.Create<string>((input) =>
